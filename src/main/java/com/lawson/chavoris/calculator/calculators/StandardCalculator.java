@@ -1,24 +1,12 @@
-package jar;
+package com.lawson.chavoris.calculator.calculators;
 
-import javaTuts.interfaces.Calculator;
 import java.util.Scanner;
 
-/**
- * Hello world!
- *
- */
-public class App {
+import com.lawson.chavoris.calculator.interfaces.Calculator;
 
-    // static StandardCalculator calc;
-    public static void main(String[] args) {
-        StandardCalculator calc = new StandardCalculator();
-        calc.play();
-        calc.raise(5, 6);
-        System.out.println(calc.total);
-    }
-}
 
-class StandardCalculator implements Calculator {
+
+public class StandardCalculator implements Calculator {
 
     int total;
 
@@ -28,7 +16,7 @@ class StandardCalculator implements Calculator {
         Scanner s = new Scanner(System.in);
         help();
         String input = "";
-        
+
         while (!input.equalsIgnoreCase("exit")) {
             input = s.nextLine();
             if (input.equals("+")) {
@@ -63,7 +51,7 @@ class StandardCalculator implements Calculator {
                 int b = Integer.parseInt(s.nextLine());
                 divide(a, b);
                 System.out.println(this.total);
-                
+
             } else if (input.equalsIgnoreCase("h")) {
                 help();
             } else if (input.equalsIgnoreCase("exit")) {
@@ -115,11 +103,11 @@ class StandardCalculator implements Calculator {
         total /= a;
     }
 
-    void raise(int a, int b) {
+    public void raise(int a, int b) {
         total = a ^ b;
     }
 
-    void raise(int a) {
+    public void raise(int a) {
         total ^= a;
     }
 
@@ -133,5 +121,13 @@ class StandardCalculator implements Calculator {
 
     public void turnOff() {
 
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 }
