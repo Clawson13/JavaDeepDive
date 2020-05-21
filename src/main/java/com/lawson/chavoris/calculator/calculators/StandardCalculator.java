@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 import com.lawson.chavoris.calculator.interfaces.Calculator;
 
-
-
 public class StandardCalculator implements Calculator {
 
     int total;
@@ -121,13 +119,5 @@ public class StandardCalculator implements Calculator {
 
     public void turnOff() {
 
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
     }
 }
