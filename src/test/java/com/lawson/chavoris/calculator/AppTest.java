@@ -1,4 +1,4 @@
-package jar;
+package com.lawson.chavoris.calculator;
 
 import static org.junit.Assert.assertTrue;
 

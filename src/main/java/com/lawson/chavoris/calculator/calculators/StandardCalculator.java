@@ -157,4 +157,12 @@ public class StandardCalculator implements BaseMathCalculator {
     public void turnOff() {
 
     }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
 }
