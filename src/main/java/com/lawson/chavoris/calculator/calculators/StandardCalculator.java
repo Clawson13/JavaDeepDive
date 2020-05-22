@@ -9,81 +9,40 @@ public class StandardCalculator implements BaseMathCalculator {
     private int total;
     protected static final String ENTER_MESSAGE = "Enter a number: ";
     private Scanner s = new Scanner(System.in);
+    private int a = 0;
+    private int b = 0;
+
     // make this more modular like adding being able to read multiple arguments like
     // the command line and reading symbols.
     public void play() {
-        
         help();
         String op = "";
-        int a=0;
-        int b=0;
-
         while (!op.equalsIgnoreCase("exit")) {
             op = s.nextLine();
             selectOperation(op);
         }
     }
-    private void selectOperation(String op){
+
+    private void selectOperation(String op) {
         if (op.equals("+")) {
             add();
-        }
-        } else if (input.equals("-")) {
-            if(total!=0){
-                
-                System.out.println("Enter a number to subtract: ");
-                a = Integer.parseInt(s.nextLine());
-                subtract(a);
-                total();
-             
-        }else{
-            System.out.println(ENTER_MESSAGE);
-            a = Integer.parseInt(s.nextLine());
-            System.out.println("Enter a number to subtract: ");
-            b = Integer.parseInt(s.nextLine());
-            subtract(a, b);
-            System.out.println(this.total);
-    }
-        } else if (input.equals("*")) {
-            if(total!=0){
-                
-                System.out.println("Enter a number to multiply: ");
-                a = Integer.parseInt(s.nextLine());
-                multiply(a);
-                total();
-             
-        }else{
-            System.out.println(ENTER_MESSAGE);
-            a = Integer.parseInt(s.nextLine());
-            System.out.println("Enter a number to multiply: ");
-            b = Integer.parseInt(s.nextLine());
-            multiply(a, b);
-            System.out.println(this.total);
-        }
-        } else if (input.equals("/")) {
-            if(total!=0){
-                
-                System.out.println("Enter a number to divide: ");
-                a = Integer.parseInt(s.nextLine());
-                divide(a);
-                total();
-             
-        }else{
-            System.out.println(ENTER_MESSAGE);
-            a = Integer.parseInt(s.nextLine());
-            System.out.println("Enter a number to divide: ");
-            b = Integer.parseInt(s.nextLine());
-            divide(a, b);
-            System.out.println(this.total);
-        }
-        }else if (input.equalsIgnoreCase("-h")) {
-
+        } else if (op.equals("-")) {
+            subtract();
+        } else if (op.equals("*")) {
+            multiply();
+        } else if (op.equals("/")) {
+            divide();
+        } else if(op.equals("^")){
+            powOf2();
+        }else if (op.equalsIgnoreCase("-h")) {
             help();
-        } else if (input.equalsIgnoreCase("-e")) {
-            input = "exit";
+        } else if (op.equalsIgnoreCase("-e")) {
+            System.out.println("Goodbye!");
             s.close();
             System.exit(0);
-        } else if(input.equalsIgnoreCase("-c")){
+        } else if (op.equalsIgnoreCase("-c")) {
             clear();
+            total();
         } else {
             System.out.println("That's not a valid command.");
         }
@@ -99,31 +58,29 @@ public class StandardCalculator implements BaseMathCalculator {
     }
 
     public void add(int a, int b) {
-        this.total = a + b;
+        total = a + b;
     }
 
     public void add(int a) {
         total += a;
     }
-    private void add(){
-        int a=0;
-        int b=0;
-        if(total!=0){
-                
+
+    private void add() {
+        if (total != 0) {
             System.out.println("Enter a number to add: ");
             a = Integer.parseInt(s.nextLine());
             add(a);
             total();
-         
-    }else{
-    System.out.println(ENTER_MESSAGE);
-    a = Integer.parseInt(s.nextLine());
-    System.out.println("Enter a number to add: ");
-    b = Integer.parseInt(s.nextLine());
-    add(a, b);
-    total();
+
+        } else {
+            System.out.println(ENTER_MESSAGE);
+            a = Integer.parseInt(s.nextLine());
+            System.out.println("Enter a number to add: ");
+            b = Integer.parseInt(s.nextLine());
+            add(a, b);
+            total();
+        }
     }
-}
 
     public void subtract(int a, int b) {
         total = a - b;
@@ -131,6 +88,22 @@ public class StandardCalculator implements BaseMathCalculator {
 
     public void subtract(int a) {
         total -= a;
+    }
+
+    public void subtract() {
+        if (total != 0) {
+            System.out.println("Enter a number to subtract: ");
+            a = Integer.parseInt(s.nextLine());
+            subtract(a);
+            total();
+        } else {
+            System.out.println(ENTER_MESSAGE);
+            a = Integer.parseInt(s.nextLine());
+            System.out.println("Enter a number to subtract: ");
+            b = Integer.parseInt(s.nextLine());
+            subtract(a, b);
+            total();
+        }
     }
 
     public void multiply(int a, int b) {
@@ -141,6 +114,23 @@ public class StandardCalculator implements BaseMathCalculator {
         total *= a;
     }
 
+    public void multiply() {
+        if (total != 0) {
+            System.out.println("Enter a number to multiply: ");
+            a = Integer.parseInt(s.nextLine());
+            multiply(a);
+            total();
+
+        } else {
+            System.out.println(ENTER_MESSAGE);
+            a = Integer.parseInt(s.nextLine());
+            System.out.println("Enter a number to multiply: ");
+            b = Integer.parseInt(s.nextLine());
+            multiply(a, b);
+            total();
+        }
+    }
+
     public void divide(int a, int b) {
         total = a / b;
     }
@@ -149,12 +139,36 @@ public class StandardCalculator implements BaseMathCalculator {
         total /= a;
     }
 
+    public void divide() {
+        if (total != 0) {
+            System.out.println("Enter a number to divide: ");
+            a = Integer.parseInt(s.nextLine());
+            divide(a);
+            total();
+
+        } else {
+            System.out.println(ENTER_MESSAGE);
+            a = Integer.parseInt(s.nextLine());
+            System.out.println("Enter a number to divide: ");
+            b = Integer.parseInt(s.nextLine());
+            divide(a, b);
+            total();
+        }
+    }
+
     public void powOf2() {
-        total ^= 2;
+        if (total != 0) {
+            total *= total;
+        } else {
+            System.out.println(ENTER_MESSAGE);
+            a = Integer.parseInt(s.nextLine());
+            powOf2(a);
+        }
+        total();
     }
 
     public void powOf2(int a) {
-        total = a^2;
+        total = a*a;
     }
 
     public void clear() {
@@ -166,14 +180,10 @@ public class StandardCalculator implements BaseMathCalculator {
     }
 
     public void turnOff() {
-        System.out.println("Calculator powering off..."); //I probably won't need these, invest in looking at a logger
+        System.out.println("Calculator powering off..."); // I probably won't need these, invest in looking at a logger
     }
 
-    public int getTotal() {
+    public int getTotal(){
         return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
     }
 }

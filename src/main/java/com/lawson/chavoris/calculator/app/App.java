@@ -12,6 +12,6 @@ public class App {
     public static void main(String[] args) {
         StandardCalculator calc = new StandardCalculator();
         calc.play();
-        //calc.raise(5, 6);
+        // calc.raise(5, 6);
     }
 }
