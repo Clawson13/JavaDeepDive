@@ -7,93 +7,85 @@ import com.lawson.chavoris.calculator.interfaces.BaseMathCalculator;
 public class StandardCalculator implements BaseMathCalculator {
 
     private int total;
-
+    protected static final String ENTER_MESSAGE = "Enter a number: ";
+    private Scanner s = new Scanner(System.in);
     // make this more modular like adding being able to read multiple arguments like
     // the command line and reading symbols.
     public void play() {
-        Scanner s = new Scanner(System.in);
+        
         help();
-        String input = "";
+        String op = "";
+        int a=0;
+        int b=0;
 
-        while (!input.equalsIgnoreCase("exit")) {
-            input = s.nextLine();
-
-            if (input.equals("+")) {
-                if(total!=0){
-                    
-                        System.out.println("Enter a number to add: ");
-                        int a = Integer.parseInt(s.nextLine());
-                        add(a);
-                        total();
-                     
-                }else{
-                System.out.println("Enter a number: ");
-                int a = Integer.parseInt(s.nextLine());
-                System.out.println("Enter the next number to add: ");
-                int b = Integer.parseInt(s.nextLine());
-                add(a, b);
-                System.out.println(this.total);
-            }
-            } else if (input.equals("-")) {
-                if(total!=0){
-                    
-                    System.out.println("Enter a number to subtract: ");
-                    int a = Integer.parseInt(s.nextLine());
-                    subtract(a);
-                    total();
-                 
-            }else{
-                System.out.println("Enter a number: ");
-                int a = Integer.parseInt(s.nextLine());
-                System.out.println("Enter the next number to subtract: ");
-                int b = Integer.parseInt(s.nextLine());
-                subtract(a, b);
-                System.out.println(this.total);
+        while (!op.equalsIgnoreCase("exit")) {
+            op = s.nextLine();
+            selectOperation(op);
         }
-            } else if (input.equals("*")) {
-                if(total!=0){
-                    
-                    System.out.println("Enter a number to multiply: ");
-                    int a = Integer.parseInt(s.nextLine());
-                    multiply(a);
-                    total();
-                 
-            }else{
-                System.out.println("Enter a number: ");
-                int a = Integer.parseInt(s.nextLine());
-                System.out.println("Enter the next number to multiply: ");
-                int b = Integer.parseInt(s.nextLine());
-                multiply(a, b);
-                System.out.println(this.total);
-            }
-            } else if (input.equals("/")) {
-                if(total!=0){
-                    
-                    System.out.println("Enter a number to divide: ");
-                    int a = Integer.parseInt(s.nextLine());
-                    divide(a);
-                    total();
-                 
-            }else{
-                System.out.println("Enter a number: ");
-                int a = Integer.parseInt(s.nextLine());
-                System.out.println("Enter the next number to divide: ");
-                int b = Integer.parseInt(s.nextLine());
-                divide(a, b);
-                System.out.println(this.total);
-            }
-            }else if (input.equalsIgnoreCase("-h")) {
+    }
+    private void selectOperation(String op){
+        if (op.equals("+")) {
+            add();
+        }
+        } else if (input.equals("-")) {
+            if(total!=0){
+                
+                System.out.println("Enter a number to subtract: ");
+                a = Integer.parseInt(s.nextLine());
+                subtract(a);
+                total();
+             
+        }else{
+            System.out.println(ENTER_MESSAGE);
+            a = Integer.parseInt(s.nextLine());
+            System.out.println("Enter a number to subtract: ");
+            b = Integer.parseInt(s.nextLine());
+            subtract(a, b);
+            System.out.println(this.total);
+    }
+        } else if (input.equals("*")) {
+            if(total!=0){
+                
+                System.out.println("Enter a number to multiply: ");
+                a = Integer.parseInt(s.nextLine());
+                multiply(a);
+                total();
+             
+        }else{
+            System.out.println(ENTER_MESSAGE);
+            a = Integer.parseInt(s.nextLine());
+            System.out.println("Enter a number to multiply: ");
+            b = Integer.parseInt(s.nextLine());
+            multiply(a, b);
+            System.out.println(this.total);
+        }
+        } else if (input.equals("/")) {
+            if(total!=0){
+                
+                System.out.println("Enter a number to divide: ");
+                a = Integer.parseInt(s.nextLine());
+                divide(a);
+                total();
+             
+        }else{
+            System.out.println(ENTER_MESSAGE);
+            a = Integer.parseInt(s.nextLine());
+            System.out.println("Enter a number to divide: ");
+            b = Integer.parseInt(s.nextLine());
+            divide(a, b);
+            System.out.println(this.total);
+        }
+        }else if (input.equalsIgnoreCase("-h")) {
 
-                help();
-            } else if (input.equalsIgnoreCase("-e")) {
-                input = "exit";
-                s.close();
-                System.exit(0);
-            } else if(input.equalsIgnoreCase("-c")){
-                clear();
-            } else {
-                System.out.println("That's not a valid command.");
-            }
+            help();
+        } else if (input.equalsIgnoreCase("-e")) {
+            input = "exit";
+            s.close();
+            System.exit(0);
+        } else if(input.equalsIgnoreCase("-c")){
+            clear();
+        } else {
+            System.out.println("That's not a valid command.");
         }
     }
 
@@ -113,6 +105,25 @@ public class StandardCalculator implements BaseMathCalculator {
     public void add(int a) {
         total += a;
     }
+    private void add(){
+        int a=0;
+        int b=0;
+        if(total!=0){
+                
+            System.out.println("Enter a number to add: ");
+            a = Integer.parseInt(s.nextLine());
+            add(a);
+            total();
+         
+    }else{
+    System.out.println(ENTER_MESSAGE);
+    a = Integer.parseInt(s.nextLine());
+    System.out.println("Enter a number to add: ");
+    b = Integer.parseInt(s.nextLine());
+    add(a, b);
+    total();
+    }
+}
 
     public void subtract(int a, int b) {
         total = a - b;
@@ -151,11 +162,11 @@ public class StandardCalculator implements BaseMathCalculator {
     }
 
     public void turnOn() {
-
+        System.out.println("Calculator powering on...");
     }
 
     public void turnOff() {
-
+        System.out.println("Calculator powering off..."); //I probably won't need these, invest in looking at a logger
     }
 
     public int getTotal() {
