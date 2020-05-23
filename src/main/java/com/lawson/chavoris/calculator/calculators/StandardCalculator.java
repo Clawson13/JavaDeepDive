@@ -6,7 +6,8 @@ import com.lawson.chavoris.calculator.interfaces.BaseMathCalculator;
 
 public class StandardCalculator implements BaseMathCalculator {
 
-    private int total;
+    private double total;
+    private String sTotal="0";
     protected static final String ENTER_MESSAGE = "Enter a number: ";
     private Scanner s = new Scanner(System.in);
     private int a = 0;
@@ -32,9 +33,9 @@ public class StandardCalculator implements BaseMathCalculator {
             multiply();
         } else if (op.equals("/")) {
             divide();
-        } else if(op.equals("^")){
+        } else if (op.equals("^")) {
             powOf2();
-        }else if (op.equalsIgnoreCase("-h")) {
+        } else if (op.equalsIgnoreCase("-h")) {
             help();
         } else if (op.equalsIgnoreCase("-e")) {
             System.out.println("Goodbye!");
@@ -49,8 +50,8 @@ public class StandardCalculator implements BaseMathCalculator {
     }
 
     public void help() {
-        System.out.println(
-                "Enter: + to add.\n\t - to subtract \n\t * to multiply \n\t \\ to divide \n\t -h to repeat these options \n\t -e to exit \n\t -c to clear");
+        String helpMessage = "Enter: + to add.\n\t - to subtract \n\t * to multiply \n\t \\ to divide \n\t ^ to raise square 'sqrt' to take the square root -h to repeat these options \n\t -e to exit \n\t -c to clear";
+        System.out.println(helpMessage);
     }
 
     public void total() {
@@ -59,6 +60,9 @@ public class StandardCalculator implements BaseMathCalculator {
 
     public void add(int a, int b) {
         total = a + b;
+        //1 + 1 = 2
+        //1.2 + 1.3 = 2.5
+        //1.2 + 1.32 = 2.52
     }
 
     public void add(int a) {
@@ -66,19 +70,28 @@ public class StandardCalculator implements BaseMathCalculator {
     }
 
     private void add() {
-        if (total != 0) {
+        if (!sTotal.equals("0")) {
             System.out.println("Enter a number to add: ");
-            a = Integer.parseInt(s.nextLine());
-            add(a);
-            total();
+            //if(s.nextLine().length()>1){
+                double x = Double.parseDouble(s.nextLine());
+                double y = Double.parseDouble(sTotal);
+                sTotal = String.format("%f",x+y);
+                System.out.println(sTotal);
+            //}
+            //a = Integer.parseInt(s.nextLine());
+            //add(a);
+            //total();
 
         } else {
             System.out.println(ENTER_MESSAGE);
-            a = Integer.parseInt(s.nextLine());
+            double x = Double.parseDouble(s.nextLine());
             System.out.println("Enter a number to add: ");
-            b = Integer.parseInt(s.nextLine());
-            add(a, b);
-            total();
+            double y = Double.parseDouble(s.nextLine());
+            sTotal = String.format("%f",x+y);
+            System.out.println(sTotal);
+            //add(a, b);
+            //total();
+        
         }
     }
 
@@ -168,7 +181,19 @@ public class StandardCalculator implements BaseMathCalculator {
     }
 
     public void powOf2(int a) {
-        total = a*a;
+        total = a * a;
+    }
+
+    public void sqrt(int a) {
+        total = Math.sqrt(a);
+    }
+
+    public void sqrt() {
+        if (total != 0) {
+            Math.sqrt(total);
+        } else {
+            sqrt();
+        }
     }
 
     public void clear() {
@@ -183,7 +208,7 @@ public class StandardCalculator implements BaseMathCalculator {
         System.out.println("Calculator powering off..."); // I probably won't need these, invest in looking at a logger
     }
 
-    public int getTotal(){
+    public double getTotal() {
         return total;
     }
 }

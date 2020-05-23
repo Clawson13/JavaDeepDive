@@ -13,7 +13,7 @@ public class StandardCalculatorTest {
     @Test
     public void addTest(){
         calc.add(1,1);
-        int val = calc.getTotal();
-        assertEquals(2, val);
+        String val = Double.toString(calc.getTotal());
+        assertEquals("2", val);
     }
 }
