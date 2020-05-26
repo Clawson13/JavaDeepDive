@@ -6,12 +6,12 @@ import com.lawson.chavoris.calculator.interfaces.BaseMathCalculator;
 
 public class StandardCalculator implements BaseMathCalculator {
 
-    private double total;
-    private String sTotal="0";
+    double total;
+    String sTotal="0";
     protected static final String ENTER_MESSAGE = "Enter a number: ";
-    private Scanner s = new Scanner(System.in);
-    private int a = 0;
-    private int b = 0;
+    Scanner s = new Scanner(System.in);
+    int a = 0;
+    int b = 0;
 
     // make this more modular like adding being able to read multiple arguments like
     // the command line and reading symbols.
