@@ -75,7 +75,8 @@ public class StandardCalculator implements BaseMathCalculator {
             //if(s.nextLine().length()>1){
                 double x = Double.parseDouble(s.nextLine());
                 double y = Double.parseDouble(sTotal);
-                sTotal = String.format("%f",x+y);
+                sTotal = Double.toString(x+y);//String.format("%-10.9f",x+y);
+                sTotal = isWholeNum(sTotal);
                 System.out.println(sTotal);
             //}
             //a = Integer.parseInt(s.nextLine());
@@ -85,9 +86,13 @@ public class StandardCalculator implements BaseMathCalculator {
         } else {
             System.out.println(ENTER_MESSAGE);
             double x = Double.parseDouble(s.nextLine());
+            System.out.println(x);
             System.out.println("Enter a number to add: ");
             double y = Double.parseDouble(s.nextLine());
-            sTotal = String.format("%f",x+y);
+            System.out.println(y);
+            double temp = x+y;
+            sTotal = Double.toString(temp);//String.format(""+temp);
+            sTotal = isWholeNum(sTotal);
             System.out.println(sTotal);
             //add(a, b);
             //total();
@@ -210,5 +215,12 @@ public class StandardCalculator implements BaseMathCalculator {
 
     public double getTotal() {
         return total;
+    }
+
+    public String isWholeNum(String sTotal){
+        if(sTotal.substring(sTotal.length()-2,sTotal.length()).equals(".0")){
+            sTotal = sTotal.substring(0, sTotal.length()-2);
+        }
+        return sTotal;
     }
 }
