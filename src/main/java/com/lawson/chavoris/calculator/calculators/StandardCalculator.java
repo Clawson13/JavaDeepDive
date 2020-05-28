@@ -2,12 +2,12 @@ package com.lawson.chavoris.calculator.calculators;
 
 import java.util.Scanner;
 
-import com.lawson.chavoris.calculator.interfaces.BaseMathCalculator;
+import com.lawson.chavoris.calculator.abstractions.BaseMathCalculator;
 
-public class StandardCalculator implements BaseMathCalculator {
+public class StandardCalculator extends BaseMathCalculator {
 
-    double total;
-    String sTotal="0";
+    private double total;
+    private String sTotal="0";
     protected static final String ENTER_MESSAGE = "Enter a number: ";
     Scanner s = new Scanner(System.in);
     int a = 0;
@@ -50,7 +50,17 @@ public class StandardCalculator implements BaseMathCalculator {
     }
 
     public void help() {
-        String helpMessage = "Enter: + to add.\n\t - to subtract \n\t * to multiply \n\t \\ to divide \n\t ^ to raise square 'sqrt' to take the square root -h to repeat these options \n\t -e to exit \n\t -c to clear";
+        String helpMessage = 
+        "Enter: \n"+
+        "+ to add \n"+
+        "- to subtract \n"+
+        "* to multiply \n"+
+        "\\ to divide \n"+
+        "^ to raise square \n"+
+        "\"sqrt\" to take the square root \n"+
+        "-h to repeat these options \n"+
+        "-e to exit \n"+
+        "-c to clear";
         System.out.println(helpMessage);
     }
 
@@ -70,6 +80,9 @@ public class StandardCalculator implements BaseMathCalculator {
     }
 
     private void add() {
+        //StringBuilder .append() would work for the doubles and all I have to do is return .toString();
+        //might be good for doing command line arguments and doing ops on multiple numbers
+        //.valueOf()
         if (!sTotal.equals("0")) {
             System.out.println("Enter a number to add: ");
             //if(s.nextLine().length()>1){
@@ -218,6 +231,8 @@ public class StandardCalculator implements BaseMathCalculator {
     }
 
     public String isWholeNum(String sTotal){
+        //use .indexOf(".0") and/or .contains(".0") or .endsWith(".0");
+        //use .replace(".0","") once confirmed it's there.
         if(sTotal.substring(sTotal.length()-2,sTotal.length()).equals(".0")){
             sTotal = sTotal.substring(0, sTotal.length()-2);
         }
