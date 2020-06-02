@@ -1,6 +1,9 @@
 package com.lawson.chavoris.calculator.app;
 
+import java.sql.SQLException;
+
 import com.lawson.chavoris.calculator.calculators.StandardCalculator;
+import com.lawson.chavoris.calculator.database.JDBCTest;
 
 /**
  * Runs Calculator application
@@ -9,8 +12,8 @@ import com.lawson.chavoris.calculator.calculators.StandardCalculator;
  */
 public class App {
     public static void main(String[] args) {
-        StandardCalculator calc = new StandardCalculator();
-        calc.play();
+        //StandardCalculator calc = new StandardCalculator();
+        //calc.play();
         // if(args.length>2){
         //     double sum=0;
         //     for(int i=0;i<args.length;i++){
@@ -21,6 +24,13 @@ public class App {
         //         }
         //     }
         // }
+        //JDBCTest test = new JDBCTest();
+        try{
+          JDBCTest.connectDb();
+        } catch(SQLException sql){
+          System.err.println(sql.getMessage());
+        }
+        
     }
     public static boolean isNumeric(String str) { 
         try {  
