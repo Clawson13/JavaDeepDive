@@ -10,8 +10,8 @@ public class StandardCalculator extends BaseMathCalculator {
     private String sTotal="0";
     protected static final String ENTER_MESSAGE = "Enter a number: ";
     Scanner s = new Scanner(System.in);
-    int a = 0;
-    int b = 0;
+    double a = 0;
+    double b = 0;
 
     // make this more modular like adding being able to read multiple arguments like
     // the command line and reading symbols.
@@ -65,18 +65,20 @@ public class StandardCalculator extends BaseMathCalculator {
     }
 
     public void total() {
-        System.out.println(total);
+        System.out.println(sTotal);
     }
 
-    public void add(int a, int b) {
-        total = a + b;
-        //1 + 1 = 2
-        //1.2 + 1.3 = 2.5
-        //1.2 + 1.32 = 2.52
+    public void add(double a, double b) {
+        sTotal = Double.toString(a+b);//String.format(""+temp);
+        sTotal = isWholeNum(sTotal);
+        total();
     }
 
-    public void add(int a) {
-        total += a;
+    public void add(double a) {
+        double b = Double.parseDouble(sTotal);
+        sTotal = Double.toString(a+b);
+        sTotal = isWholeNum(sTotal);
+        total();
     }
 
     private void add() {
@@ -85,39 +87,23 @@ public class StandardCalculator extends BaseMathCalculator {
         //.valueOf()
         if (!sTotal.equals("0")) {
             System.out.println("Enter a number to add: ");
-            //if(s.nextLine().length()>1){
-                double x = Double.parseDouble(s.nextLine());
-                double y = Double.parseDouble(sTotal);
-                sTotal = Double.toString(x+y);//String.format("%-10.9f",x+y);
-                sTotal = isWholeNum(sTotal);
-                System.out.println(sTotal);
-            //}
-            //a = Integer.parseInt(s.nextLine());
-            //add(a);
-            //total();
+            double a = Double.parseDouble(s.nextLine());
+            add(a);
 
         } else {
             System.out.println(ENTER_MESSAGE);
-            double x = Double.parseDouble(s.nextLine());
-            System.out.println(x);
+            double a = Double.parseDouble(s.nextLine());
             System.out.println("Enter a number to add: ");
-            double y = Double.parseDouble(s.nextLine());
-            System.out.println(y);
-            double temp = x+y;
-            sTotal = Double.toString(temp);//String.format(""+temp);
-            sTotal = isWholeNum(sTotal);
-            System.out.println(sTotal);
-            //add(a, b);
-            //total();
-        
+            double b = Double.parseDouble(s.nextLine());
+            add(a,b);
         }
     }
 
-    public void subtract(int a, int b) {
+    public void subtract(double a, double b) {
         total = a - b;
     }
 
-    public void subtract(int a) {
+    public void subtract(double a) {
         total -= a;
     }
 
@@ -137,11 +123,11 @@ public class StandardCalculator extends BaseMathCalculator {
         }
     }
 
-    public void multiply(int a, int b) {
+    public void multiply(double a, double b) {
         total = a * b;
     }
 
-    public void multiply(int a) {
+    public void multiply(double a) {
         total *= a;
     }
 
@@ -162,11 +148,11 @@ public class StandardCalculator extends BaseMathCalculator {
         }
     }
 
-    public void divide(int a, int b) {
+    public void divide(double a, double b) {
         total = a / b;
     }
 
-    public void divide(int a) {
+    public void divide(double a) {
         total /= a;
     }
 
@@ -198,11 +184,11 @@ public class StandardCalculator extends BaseMathCalculator {
         total();
     }
 
-    public void powOf2(int a) {
+    public void powOf2(double a) {
         total = a * a;
     }
 
-    public void sqrt(int a) {
+    public void sqrt(double a) {
         total = Math.sqrt(a);
     }
 
@@ -226,8 +212,8 @@ public class StandardCalculator extends BaseMathCalculator {
         System.out.println("Calculator powering off..."); // I probably won't need these, invest in looking at a logger
     }
 
-    public double getTotal() {
-        return total;
+    public String getTotal() {
+        return sTotal;
     }
 
     public String isWholeNum(String sTotal){
