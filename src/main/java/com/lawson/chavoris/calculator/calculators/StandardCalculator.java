@@ -9,9 +9,9 @@ public class StandardCalculator extends BaseMathCalculator {
     private double total;
     private String sTotal="0";
     protected static final String ENTER_MESSAGE = "Enter a number: ";
-    Scanner s = new Scanner(System.in);
-    double a = 0;
-    double b = 0;
+    private Scanner s = new Scanner(System.in);
+    private double a = 0;
+    private double b = 0;
 
     // make this more modular like adding being able to read multiple arguments like
     // the command line and reading symbols.
@@ -74,8 +74,8 @@ public class StandardCalculator extends BaseMathCalculator {
         total();
     }
 
-    public void add(double a) {
-        double b = Double.parseDouble(sTotal);
+    public void add(double b) {
+        a = Double.parseDouble(sTotal);
         sTotal = Double.toString(a+b);
         sTotal = isWholeNum(sTotal);
         total();
@@ -87,87 +87,98 @@ public class StandardCalculator extends BaseMathCalculator {
         //.valueOf()
         if (!sTotal.equals("0")) {
             System.out.println("Enter a number to add: ");
-            double a = Double.parseDouble(s.nextLine());
-            add(a);
+            b = Double.parseDouble(s.nextLine());
+            add(b);
 
         } else {
             System.out.println(ENTER_MESSAGE);
-            double a = Double.parseDouble(s.nextLine());
+            a = Double.parseDouble(s.nextLine());
             System.out.println("Enter a number to add: ");
-            double b = Double.parseDouble(s.nextLine());
+            b = Double.parseDouble(s.nextLine());
             add(a,b);
         }
     }
 
     public void subtract(double a, double b) {
-        total = a - b;
+        sTotal = Double.toString(a-b);
+        sTotal = isWholeNum(sTotal);
+        total();
     }
 
-    public void subtract(double a) {
-        total -= a;
+    public void subtract(double b) {
+        a = Double.parseDouble(sTotal);
+        sTotal = Double.toString(a-b);
+        sTotal = isWholeNum(sTotal);
+        total();
     }
 
     public void subtract() {
-        if (total != 0) {
+        if (!sTotal.equals("0")) {
             System.out.println("Enter a number to subtract: ");
-            a = Integer.parseInt(s.nextLine());
-            subtract(a);
-            total();
+            b = Double.parseDouble(s.nextLine());
+            subtract(b);
         } else {
             System.out.println(ENTER_MESSAGE);
-            a = Integer.parseInt(s.nextLine());
+            a = Double.parseDouble(s.nextLine());
             System.out.println("Enter a number to subtract: ");
-            b = Integer.parseInt(s.nextLine());
+            b = Double.parseDouble(s.nextLine());
             subtract(a, b);
-            total();
         }
     }
 
     public void multiply(double a, double b) {
-        total = a * b;
+        sTotal = Double.toString(a*b);
+        sTotal = isWholeNum(sTotal);
+        total();
     }
 
-    public void multiply(double a) {
-        total *= a;
+    public void multiply(double b) {
+        a = Double.parseDouble(sTotal);
+        sTotal = Double.toString(a*b);
+        sTotal = isWholeNum(sTotal);
+        total();
     }
 
     public void multiply() {
-        if (total != 0) {
+        if (!sTotal.equals("0")) {
             System.out.println("Enter a number to multiply: ");
-            a = Integer.parseInt(s.nextLine());
-            multiply(a);
-            total();
+            b = Double.parseDouble(s.nextLine());
+            multiply(b);
 
         } else {
             System.out.println(ENTER_MESSAGE);
-            a = Integer.parseInt(s.nextLine());
+            a = Double.parseDouble(s.nextLine());
             System.out.println("Enter a number to multiply: ");
-            b = Integer.parseInt(s.nextLine());
+            b = Double.parseDouble(s.nextLine());
             multiply(a, b);
-            total();
         }
     }
 
     public void divide(double a, double b) {
-        total = a / b;
+        sTotal = Double.toString(a/b);
+        sTotal = isWholeNum(sTotal);
+        total();
     }
 
-    public void divide(double a) {
-        total /= a;
+    public void divide(double b) {
+        a = Double.parseDouble(sTotal);
+        sTotal = Double.toString(a/b);
+        sTotal = isWholeNum(sTotal);
+        total();
     }
 
-    public void divide() {
-        if (total != 0) {
+    public void divide() {//Fix division by zero
+        if (!sTotal.equals("0")) {
             System.out.println("Enter a number to divide: ");
-            a = Integer.parseInt(s.nextLine());
-            divide(a);
+            b = Double.parseDouble(s.nextLine());
+            divide(b);
             total();
 
         } else {
             System.out.println(ENTER_MESSAGE);
-            a = Integer.parseInt(s.nextLine());
+            a = Double.parseDouble(s.nextLine());
             System.out.println("Enter a number to divide: ");
-            b = Integer.parseInt(s.nextLine());
+            b = Double.parseDouble(s.nextLine());
             divide(a, b);
             total();
         }
@@ -178,7 +189,7 @@ public class StandardCalculator extends BaseMathCalculator {
             total *= total;
         } else {
             System.out.println(ENTER_MESSAGE);
-            a = Integer.parseInt(s.nextLine());
+            a = Double.parseDouble(s.nextLine());
             powOf2(a);
         }
         total();
