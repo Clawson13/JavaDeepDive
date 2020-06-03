@@ -1,5 +1,7 @@
 package com.lawson.chavoris.calculator.app;
 
+import java.util.ArrayList;
+
 import com.lawson.chavoris.calculator.calculators.StandardCalculator;
 
 /**
@@ -11,6 +13,8 @@ public class App {
     public static void main(String[] args) {
         StandardCalculator calc = new StandardCalculator();
         calc.play();
+        ArrayList<String> s = new ArrayList<>();
+        
         // if(args.length>2){
         //     double sum=0;
         //     for(int i=0;i<args.length;i++){

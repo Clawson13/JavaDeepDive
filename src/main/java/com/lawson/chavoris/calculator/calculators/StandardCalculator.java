@@ -55,7 +55,7 @@ public class StandardCalculator extends BaseMathCalculator {
         "- to subtract \n"+
         "* to multiply \n"+
         "\\ to divide \n"+
-        "^ to raise square \n"+
+        "^ to raise number or total to square \n"+
         "\"sqrt\" to take the square root \n"+
         "-h to repeat these options \n"+
         "-e to exit \n"+
@@ -230,9 +230,8 @@ public class StandardCalculator extends BaseMathCalculator {
 
     public String isWholeNum(String total){
         //use .indexOf(".0") and/or .contains(".0") or .endsWith(".0");
-        //use .replace(".0","") once confirmed it's there.
-        if(total.substring(total.length()-2,total.length()).equals(".0")){
-            total = total.substring(0, total.length()-2);
+        if(total.contains(".0")){
+            total = total.replace(".0", "");
         }
         return total;
     }
