@@ -6,8 +6,7 @@ import com.lawson.chavoris.calculator.abstractions.BaseMathCalculator;
 
 public class StandardCalculator extends BaseMathCalculator {
 
-    private double total;
-    private String sTotal="0";
+    private String total="0";
     protected static final String ENTER_MESSAGE = "Enter a number: ";
     private Scanner s = new Scanner(System.in);
     private double a = 0;
@@ -65,27 +64,25 @@ public class StandardCalculator extends BaseMathCalculator {
     }
 
     public void total() {
-        System.out.println(sTotal);
+        System.out.println(total);
     }
 
     public void add(double a, double b) {
-        sTotal = Double.toString(a+b);//String.format(""+temp);
-        sTotal = isWholeNum(sTotal);
-        total();
+        total = Double.toString(a+b);//String.format(""+temp);
+        total = isWholeNum(total);
     }
 
     public void add(double b) {
-        a = Double.parseDouble(sTotal);
-        sTotal = Double.toString(a+b);
-        sTotal = isWholeNum(sTotal);
-        total();
+        a = Double.parseDouble(total);
+        total = Double.toString(a+b);
+        total = isWholeNum(total);
     }
 
     private void add() {
         //StringBuilder .append() would work for the doubles and all I have to do is return .toString();
         //might be good for doing command line arguments and doing ops on multiple numbers
         //.valueOf()
-        if (!sTotal.equals("0")) {
+        if (!total.equals("0")) {
             System.out.println("Enter a number to add: ");
             b = Double.parseDouble(s.nextLine());
             add(b);
@@ -97,23 +94,22 @@ public class StandardCalculator extends BaseMathCalculator {
             b = Double.parseDouble(s.nextLine());
             add(a,b);
         }
+        total();
     }
 
     public void subtract(double a, double b) {
-        sTotal = Double.toString(a-b);
-        sTotal = isWholeNum(sTotal);
-        total();
+        total = Double.toString(a-b);
+        total = isWholeNum(total);
     }
 
     public void subtract(double b) {
-        a = Double.parseDouble(sTotal);
-        sTotal = Double.toString(a-b);
-        sTotal = isWholeNum(sTotal);
-        total();
+        a = Double.parseDouble(total);
+        total = Double.toString(a-b);
+        total = isWholeNum(total);
     }
 
     public void subtract() {
-        if (!sTotal.equals("0")) {
+        if (!total.equals("0")) {
             System.out.println("Enter a number to subtract: ");
             b = Double.parseDouble(s.nextLine());
             subtract(b);
@@ -124,23 +120,22 @@ public class StandardCalculator extends BaseMathCalculator {
             b = Double.parseDouble(s.nextLine());
             subtract(a, b);
         }
+        total();
     }
 
     public void multiply(double a, double b) {
-        sTotal = Double.toString(a*b);
-        sTotal = isWholeNum(sTotal);
-        total();
+        total = Double.toString(a*b);
+        total = isWholeNum(total);
     }
 
     public void multiply(double b) {
-        a = Double.parseDouble(sTotal);
-        sTotal = Double.toString(a*b);
-        sTotal = isWholeNum(sTotal);
-        total();
+        a = Double.parseDouble(total);
+        total = Double.toString(a*b);
+        total = isWholeNum(total);
     }
 
     public void multiply() {
-        if (!sTotal.equals("0")) {
+        if (!total.equals("0")) {
             System.out.println("Enter a number to multiply: ");
             b = Double.parseDouble(s.nextLine());
             multiply(b);
@@ -152,21 +147,22 @@ public class StandardCalculator extends BaseMathCalculator {
             b = Double.parseDouble(s.nextLine());
             multiply(a, b);
         }
+        total();
     }
 
     public void divide(double a, double b) {
-        sTotal = Double.toString(a/b);
-        sTotal = isWholeNum(sTotal);
+        total = Double.toString(a/b);
+        total = isWholeNum(total);
     }
 
     public void divide(double b) {
-        a = Double.parseDouble(sTotal);
-        sTotal = Double.toString(a/b);
-        sTotal = isWholeNum(sTotal);
+        a = Double.parseDouble(total);
+        total = Double.toString(a/b);
+        total = isWholeNum(total);
     }
 
     public void divide() {//Fix division by zero
-        if (!sTotal.equals("0")) {
+        if (!total.equals("0")) {
             System.out.println("Enter a number to divide: ");
             b = Double.parseDouble(s.nextLine());
             divide(b);
@@ -182,10 +178,10 @@ public class StandardCalculator extends BaseMathCalculator {
     }
 
     public void powOf2() {
-        if (!sTotal.equals("0")) {
-            a = Double.parseDouble(sTotal);
-            sTotal = Double.toString(a*a);
-            sTotal = isWholeNum(sTotal);
+        if (!total.equals("0")) {
+            a = Double.parseDouble(total);
+            total = Double.toString(a*a);
+            total = isWholeNum(total);
         } else {
             System.out.println(ENTER_MESSAGE);
             b = Double.parseDouble(s.nextLine());
@@ -195,24 +191,29 @@ public class StandardCalculator extends BaseMathCalculator {
     }
 
     public void powOf2(double b) {
-        sTotal = Double.toString(b*b);
-        sTotal = isWholeNum(sTotal);
+        total = Double.toString(b*b);
+        total = isWholeNum(total);
     }
 
-    public void sqrt(double a) {
-        total = Math.sqrt(a);
+    public void sqrt(double b) {
+        total = Double.toString(Math.sqrt(b));
+        total = isWholeNum(total);
     }
 
     public void sqrt() {
-        if (total != 0) {
-            Math.sqrt(total);
+        if (!total.equals("0")) {
+            a = Double.parseDouble(total);
+            Math.sqrt(a);
         } else {
-            sqrt();
+            System.out.println(ENTER_MESSAGE);
+            b = Double.parseDouble(s.nextLine());
+            sqrt(b);
         }
+        total();
     }
 
     public void clear() {
-        sTotal = "0";
+        total = "0";
     }
 
     public void turnOn() {
@@ -224,15 +225,15 @@ public class StandardCalculator extends BaseMathCalculator {
     }
 
     public String getTotal() {
-        return sTotal;
+        return total;
     }
 
-    public String isWholeNum(String sTotal){
+    public String isWholeNum(String total){
         //use .indexOf(".0") and/or .contains(".0") or .endsWith(".0");
         //use .replace(".0","") once confirmed it's there.
-        if(sTotal.substring(sTotal.length()-2,sTotal.length()).equals(".0")){
-            sTotal = sTotal.substring(0, sTotal.length()-2);
+        if(total.substring(total.length()-2,total.length()).equals(".0")){
+            total = total.substring(0, total.length()-2);
         }
-        return sTotal;
+        return total;
     }
 }
