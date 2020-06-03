@@ -157,14 +157,12 @@ public class StandardCalculator extends BaseMathCalculator {
     public void divide(double a, double b) {
         sTotal = Double.toString(a/b);
         sTotal = isWholeNum(sTotal);
-        total();
     }
 
     public void divide(double b) {
         a = Double.parseDouble(sTotal);
         sTotal = Double.toString(a/b);
         sTotal = isWholeNum(sTotal);
-        total();
     }
 
     public void divide() {//Fix division by zero
@@ -172,7 +170,6 @@ public class StandardCalculator extends BaseMathCalculator {
             System.out.println("Enter a number to divide: ");
             b = Double.parseDouble(s.nextLine());
             divide(b);
-            total();
 
         } else {
             System.out.println(ENTER_MESSAGE);
@@ -180,23 +177,26 @@ public class StandardCalculator extends BaseMathCalculator {
             System.out.println("Enter a number to divide: ");
             b = Double.parseDouble(s.nextLine());
             divide(a, b);
-            total();
-        }
-    }
-
-    public void powOf2() {
-        if (total != 0) {
-            total *= total;
-        } else {
-            System.out.println(ENTER_MESSAGE);
-            a = Double.parseDouble(s.nextLine());
-            powOf2(a);
         }
         total();
     }
 
-    public void powOf2(double a) {
-        total = a * a;
+    public void powOf2() {
+        if (!sTotal.equals("0")) {
+            a = Double.parseDouble(sTotal);
+            sTotal = Double.toString(a*a);
+            sTotal = isWholeNum(sTotal);
+        } else {
+            System.out.println(ENTER_MESSAGE);
+            b = Double.parseDouble(s.nextLine());
+            powOf2(b);
+        }
+        total();
+    }
+
+    public void powOf2(double b) {
+        sTotal = Double.toString(b*b);
+        sTotal = isWholeNum(sTotal);
     }
 
     public void sqrt(double a) {
@@ -212,7 +212,7 @@ public class StandardCalculator extends BaseMathCalculator {
     }
 
     public void clear() {
-        total = 0;
+        sTotal = "0";
     }
 
     public void turnOn() {
